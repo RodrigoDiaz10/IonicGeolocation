@@ -4,6 +4,8 @@ import { ViewController } from '@ionic/core';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { DbService } from '../../app/db.service';
+import { BookInterface } from '../models/book-interface';
+import { NgForm } from '@angular/forms';
 
 
 
@@ -18,7 +20,7 @@ export class ModalPage {
 lat:number;
 lng:number;
 
-address: string;
+
 description: string = '';
 foto: any = '';
 
@@ -27,7 +29,8 @@ foto: any = '';
     public navParams: NavParams,
     private modalController: ModalController,
     private camera: Camera,
-    private db: DbService
+    private db: DbService,
+    private dataApiService: DbService
     ) {}
 
   ionViewDidLoad() {
@@ -80,14 +83,27 @@ guardarSitio(){
   let sitio = {
     lat: this.lat,
     lng: this.lng ,
-    address: this.address,
     description: this.description,
     foto: this.foto
   }
   this.db.addSitio(sitio).then((res)=>{
     this.closeModal();
-   /*  alert('se ha introducido correctamente en la bd'); */
-  },(err)=>{ /* alert('error al meter en la bd'+err) */ })
+    alert('se ha introducido correctamente en la bd'); 
+  },(err)=>{  alert('error al meter en la bd'+err)  })
 }
+/*
+onPreUpdateBook(book: BookInterface): void {
+  this.dataApiService.selectedBook = Object.assign({}, book);
+}
+
+resetForm(bookForm?: NgForm): void {
+  this.dataApiService.selectedBook = {
+    id: null,
+    lat: '',
+    lng: '',
+    descripcion: '',
+    foto: ''
+  };
+}*/
 
 }

@@ -17,10 +17,11 @@
       <form (ngSubmit)="guardarSitio()">
       <ion-item>
         <img [src]="foto" *ngIf="foto" />
-        <button ion-button icon-left full type="button" (tap)="sacarFoto()">
+        <button ion-button icon-left full type="button" (click)="sacarFoto()">
           Foto&nbsp;&nbsp;
           <ion-icon name="camera"></ion-icon>
         </button>
+        <img [src]="foto" *ngIf="foto" />
       </ion-item>
       <hr/>
       <ion-item>
